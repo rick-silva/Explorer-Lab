@@ -37,3 +37,33 @@ const securityCodePattern = {
 //aplicação da Mascara IMask(Elemento, MascaraPadronizada)
 let securityCodeMasked = IMask(securityCode, securityCodePattern)
 
+//Recebe o elemento input
+let expirationDate = document.querySelector("#expiration-date")
+
+//Padronização da mascara
+let expirationDatePattern = {
+    mask: "MM{/}YY",
+    blocks: {
+      YY: {
+        mask: IMask.MaskedRange,
+        // Transforma a data atual em string, "fatia" do dado, recuperando somente os dois ultimos digitos do ano
+        from: String(new Date().getFullYear()).slice(2),
+        // Mesma função da propriedade anterior, porém soma +10 para receber um intervalo de 10 anos
+        to: String(new Date().getFullYear() + 10).slice(2)
+      },
+      MM: {
+        //mascara predefinida do IMask
+        mask: IMask.MaskedRange,
+        //de
+        from: 1,
+        //para
+        to: 12
+      }  
+    }
+}
+
+//aplicação da Mascara IMask(Elemento, MascaraPadronizada)
+let expirationCodeMasked = IMask(expirationDate, expirationDatePattern)
+
+
+
