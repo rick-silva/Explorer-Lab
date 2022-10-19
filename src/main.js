@@ -1,4 +1,5 @@
 import "./css/index.css"
+import IMask from "imask"
 
 const ccBgColor01 = document.querySelector(".cc-bg svg > g g:nth-child(1) path")
 
@@ -22,3 +23,17 @@ const setCardType = (type) => {
 }
 
 setCardType("default")
+
+globalThis.setCardType = setCardType
+
+//Recebe o elemento input
+let securityCode = document.querySelector('#security-code')
+
+//Padronização da mascara
+const securityCodePattern = {
+    mask: "0000",
+}
+
+//aplicação da Mascara IMask(Elemento, MascaraPadronizada)
+let securityCodeMasked = IMask(securityCode, securityCodePattern)
+
